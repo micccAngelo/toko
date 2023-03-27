@@ -30,22 +30,9 @@ const ProductList = () => {
     navigate('/AddProduct');
   }
 
-  const handleAddToCart = async (id, title) => {
-    setLoading(true);
-    try {
-      const success = await DeleteProduct(id);
-      if (success) {
-        setShowModal(true);
-        setProductName(title);
-        dispatch(fetchProducts());
-        setLoading(false)
-        console.log(success); 
-      }
-    } catch (error) {
-      console.error(error);
-      setLoading(false)
-    } 
-  };
+  const handleAddToCart = () => {
+
+  }
 
   return (
     <div className="product-grid">

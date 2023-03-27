@@ -5,7 +5,7 @@ import Loadings from '../../Reusable/Loadings'
 import Card from 'react-bootstrap/Card';
 import Modals from '../../Reusable/Modals'
 import Carousel from 'react-bootstrap/Carousel';
-import GetProductbyCategory from '../../APIServices/GetProductbyCategory'
+import GetSingleProduct from '../../APIServices/GetSingpleProduct';
 
 const ProductDetail = () => {
     const [loading, setLoading] = useState();
@@ -17,9 +17,8 @@ const ProductDetail = () => {
         const fetchProducts = async () => {
             setLoading(true)
             try {
-              const productData = await GetProductbyCategory(id);
+              const productData = await GetSingleProduct(id);
               console.log(id)
-              console.log(productData)
               setProduct(productData);
               console.log(productData)
               setLoading(false);
