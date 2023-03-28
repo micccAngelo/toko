@@ -111,13 +111,14 @@ export const Products = () => {
     }
 
     return (
-        <div className="product-grid">
+        <div className="product-grid">        
           <Category handleCategorySelect={handleCategorySelect} />
+          <h3 className='category-title'>Selected Category: {selectedCategory}</h3>
         <div className="product-container">
           <div className="product-card-container">
             {products && products.length > 0 && products.map(product => (
-              <Card style={{ width: '18rem' }} key={product.id} className="product-card">
-                <Link to={`/product/${product.id}`} style={{textDecoration: 'none', color: 'black'}}>
+              <Card style={{ width: '18rem', height: '450px' }} key={product.id} className="product-card-user">
+                <Link to={`/User/Product/${product.id}`} style={{textDecoration: 'none', color: 'black'}}>
                   <Card.Img variant="top" style={{ width: '100%', height: '200px', objectFit: 'cover' }} src={product.images[0]} />
                   <Card.Body>
                     <Card.Text className='text-left title'>{product.title}</Card.Text>

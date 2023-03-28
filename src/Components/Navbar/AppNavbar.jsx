@@ -52,7 +52,7 @@ function AppNavbar() {
   return (
     <Navbar expand="md">
       <Container>
-        <Link to="/Home">
+        <Link to="/User/Home">
           <Navbar.Brand>
             <img
               src="/logo_cart.png"
@@ -89,7 +89,7 @@ function AppNavbar() {
               </>
             )}
             {!isLoggedIn && (
-              <Link to="/Cart" className={`nav-link ${location.pathname === '/Cart' ? 'active' : ''}`}>
+              <Link to="/User/Cart" className={`nav-link ${location.pathname === '/User/Cart' ? 'active' : ''}`}>
                 Shopping Cart
               </Link>
             )}

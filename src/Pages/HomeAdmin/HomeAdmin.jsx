@@ -26,7 +26,7 @@ const HomeAdmin = () => {
   }, [status, dispatch]);
 
   const handleAddProduct = () => {
-    navigate('/AddProduct');
+    navigate('/Admin/AddProduct');
   }
 
   const handleDeleteProduct = async (id, title) => {
@@ -56,7 +56,7 @@ const HomeAdmin = () => {
           <Button variant="primary" className="add-product-button" onClick={handleAddProduct} disabled={loading}>+ Add New Product</Button>
           <div className="product-card-container">
             {products && products.length > 0 && products.map(product => (
-              <Card style={{ width: '18rem' }} key={product.id} className="product-card">
+              <Card style={{ width: '18rem', height: '450px' }} key={product.id} className="product-card">
                 <Card.Img variant="top" style={{ width: '250px' }} src={product.images[0]} />
                 <Card.Body>
                   <Card.Text className='text-left title'>{product.title}</Card.Text>

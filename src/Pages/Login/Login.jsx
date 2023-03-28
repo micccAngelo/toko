@@ -42,7 +42,7 @@ const Login = () => {
         setIsLoggedIn(true);
         setShowSuccess(true);
         setTimeout(() => {
-            navigate('/HomeAdmin');
+            navigate('/Admin/Home');
         }, 2000);
     };
     console.log(isLoggedIn)
