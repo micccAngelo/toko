@@ -10,6 +10,7 @@ import Category from './Components/Category/Category';
 import AddProduct from './Pages/AddProduct/AddProduct';
 import Home from './Pages/Home/Home';
 import ProductDetail from './Pages/Detail/ProductDetail';
+import Cart from './Pages/Cart/Cart'
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -31,6 +32,7 @@ const App = () => {
           <Route path='/AddProduct' element={<AddProduct />} />
           <Route path='/Login' element={<Login />} />
           <Route path='/Home' element={<Home />} />
+          <Route path='/Cart' element={<Cart />} />
           <Route path='/product/:id' element={<ProductDetail />} />
         </Routes>
       </div>

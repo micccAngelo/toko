@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../Context/AuthContext';
 import Modals from '../../Reusable/Modals';
 import { useSearchParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 function AppNavbar() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const username = localStorage.getItem('username');
   const [search, setSearch] = useSearchParams();
+  const location = useLocation();
   const navigate = useNavigate();
   
   const handleLogoutClick = (e) => {
@@ -50,15 +52,17 @@ function AppNavbar() {
   return (
     <Navbar expand="md">
       <Container>
-        <Navbar.Brand>
-          <img
-            src="/logo_cart.png"
-            width="50"
-            height="50"
-            className="d-inline-block align-top"
-            alt="React Bootstrap logo"
-          />
-        </Navbar.Brand>
+        <Link to="/Home">
+          <Navbar.Brand>
+            <img
+              src="/logo_cart.png"
+              width="50"
+              height="50"
+              className="d-inline-block align-top"
+              alt="React Bootstrap logo"
+            />
+          </Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           {!isLoggedIn && ( 
@@ -70,7 +74,7 @@ function AppNavbar() {
             {isLoggedIn && (
               <>
                 <Navbar.Text className="username me-3">Hello, {username}!</Navbar.Text>
-                <Nav.Link href="/Login" onClick={handleLogoutClick}>Logout</Nav.Link>
+                <Nav.Link href="/" onClick={handleLogoutClick}>Logout</Nav.Link>
                 <Modals
                     show={showLogoutModal}
                     title="Confirm Logout"
@@ -85,7 +89,9 @@ function AppNavbar() {
               </>
             )}
             {!isLoggedIn && (
-              <Nav.Link href="#" className="nav-link">Shopping Cart</Nav.Link>
+              <Link to="/Cart" className={`nav-link ${location.pathname === '/Cart' ? 'active' : ''}`}>
+                Shopping Cart
+              </Link>
             )}
           </Nav>
         </Navbar.Collapse>
@@ -93,6 +99,5 @@ function AppNavbar() {
     </Navbar>
   );
 }
-
 
 export default AppNavbar;

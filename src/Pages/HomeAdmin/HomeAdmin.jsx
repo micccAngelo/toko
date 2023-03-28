@@ -48,6 +48,7 @@ const HomeAdmin = () => {
 
   return (
     <div className="product-grid">
+      {loading === true && <Loadings variant="danger" />}
       {status === 'loading' && <Loadings variant="danger" />}
       {status === 'failed' && <div>Error loading products</div>}
       {status === 'succeeded' && (

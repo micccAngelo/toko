@@ -48,3 +48,7 @@
     padding: 10px;
     padding-bottom: 30px;
   }
+
+  .error-message {
+    padding-top: 50px;
+  }

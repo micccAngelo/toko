@@ -32,14 +32,14 @@ function Category() {
   };
 
   return (
-    <div className="row" style={{ paddingTop: "50px" }}>
+    <div className="row" style={{ paddingTop: "50px", position: "fixed", left: 0 }}>
       <div className="col-md-4">
         {!loading && (
           <Card className='card'>
             <Card.Header className='card-header'>
-              <Card.Title className='category-title'>Categories</Card.Title>
+              <Card.Title className='category-title category-sidebar'>Categories</Card.Title>
             </Card.Header>
-            <ListGroup variant="flush" className="custom-list-group no-border">
+            <ListGroup variant="flush" className="custom-list-group no-border" style={{ overflowY: "scroll", maxHeight: "80vh" }}>
               {categories.map((category) => (
                 <ListGroup.Item 
                   key={category} 

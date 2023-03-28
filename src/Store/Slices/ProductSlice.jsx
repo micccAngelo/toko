@@ -1,10 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import GetAllProduct from "../../APIServices/GetAllProduct";
+import Search from "../../APIServices/Search";
+import GetProductbyCategory from "../../APIServices/GetProductbyCategory";
 
 const initialState = {
     products: [],
     status: 'idle',
-    error: null
+    error: null,
+    query: '',
+    selectedCategory: ''
 }  
 
 export const fetchProducts = createAsyncThunk(
@@ -14,10 +18,34 @@ export const fetchProducts = createAsyncThunk(
         const data = await GetAllProduct();
         return data;
       } catch (error) {
-        throw new Error('Unable to fetch products');
+        console.log(error)
       }
     }
   );
+ 
+export const fetchProductSearch = createAsyncThunk(
+  'products/fetchProductSearch',
+  async (query) => {
+    try {
+      const data = await Search(query);
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
+  }
+);
+
+export const fetchProductCategory = createAsyncThunk(
+  'products/fetchProductCategory',
+  async (selectedCategory) => {
+    try {
+      const data = await GetProductbyCategory(selectedCategory);
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
+  }
+);
 
 const ProductSlice = createSlice({
     name: 'products',
