@@ -4,14 +4,9 @@ import { ListGroup, Card } from 'react-bootstrap';
 import Loadings from '../../Reusable/Loadings';
 import './Category.css';
 
-function Category() {
+function Category({ handleCategorySelect, selectedCategory }) {
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(localStorage.getItem('selectedCategory') || '');
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    localStorage.setItem('selectedCategory', selectedCategory);
-  }, [selectedCategory]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -29,9 +24,9 @@ function Category() {
 
   const handleCategoryClick = (category) => {
     if (category === selectedCategory) {
-      setSelectedCategory(null);
+      handleCategorySelect(null);
     } else {
-      setSelectedCategory(category);
+      handleCategorySelect(category);
     }
   };
   
@@ -49,7 +44,7 @@ function Category() {
                   key={category} 
                   action 
                   active={category === selectedCategory}
-                  onClick={() => handleCategoryClick(category)}
+                  onClick={() => handleCategorySelect(category)}
                 >
                   {category}
                 </ListGroup.Item>

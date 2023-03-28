@@ -20,7 +20,7 @@ export const Products = () => {
     const [notFound, setNotFound] = useState(false);
     const cartItems = useSelector((state) => state.cart.cartItems);
     const dispatch = useDispatch();
-    const [selectedCategory, setSelectedCategory] = useState(localStorage.getItem('selectedCategory') || '');
+    const [selectedCategory, setSelectedCategory] = useState('');
     const [search] = useSearchParams()
 
     console.log(selectedCategory)
@@ -34,8 +34,8 @@ export const Products = () => {
     }, [search])
 
     useEffect(() => {
-        if (selectedCategory !== ' ') {
-            setLoading(true)
+      setLoading(true)
+        if (selectedCategory !== '') {
             fetchProductbyCategory(selectedCategory)
             setLoading(false)
         } 
@@ -78,15 +78,17 @@ export const Products = () => {
           console.log(selectedCategory)
           setProducts(data);
           console.log(data);
+          setLoading(false);
         } catch (error) {
           console.log(error);
-        } finally {
           setLoading(false);
-        }
+        } 
       };
 
-    const handleCategorySelect = (category) => {
-        setSelectedCategory(category);
+    const handleCategorySelect = (selectedCategory) => 
+    {
+      console.log(selectedCategory)
+        setSelectedCategory(selectedCategory);
       }
 
     const handleAddToCart = (product) => {
@@ -110,7 +112,7 @@ export const Products = () => {
 
     return (
         <div className="product-grid">
-            <Category onSelectCategory={handleCategorySelect} />
+          <Category handleCategorySelect={handleCategorySelect} />
         <div className="product-container">
           <div className="product-card-container">
             {products && products.length > 0 && products.map(product => (
