@@ -21,14 +21,6 @@ function Category({ handleCategorySelect, selectedCategory }) {
     };
     fetchCategories();
   }, []);
-
-  const handleCategoryClick = (category) => {
-    if (category === selectedCategory) {
-      handleCategorySelect(null);
-    } else {
-      handleCategorySelect(category);
-    }
-  };
   
   return (
     <div className="row" style={{ paddingTop: "50px", position: "fixed", left: 0 }}>
