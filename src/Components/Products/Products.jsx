@@ -21,8 +21,9 @@ export const Products = () => {
     const cartItems = useSelector((state) => state.cart.cartItems);
     const dispatch = useDispatch();
     const [selectedCategory, setSelectedCategory] = useState(localStorage.getItem('selectedCategory') || '');
-
     const [search] = useSearchParams()
+
+    console.log(selectedCategory)
 
     useEffect(() => {
         if (search.toString()) {
@@ -34,7 +35,9 @@ export const Products = () => {
 
     useEffect(() => {
         if (selectedCategory !== ' ') {
+            setLoading(true)
             fetchProductbyCategory(selectedCategory)
+            setLoading(false)
         } 
     }, [selectedCategory])
 
@@ -68,17 +71,19 @@ export const Products = () => {
         }
       }
 
-    const fetchProductbyCategory = async (selectedCategory) => {
+      const fetchProductbyCategory = async (selectedCategory) => {
         setLoading(true);
         try {
-            const data = await GetProductbyCategory(selectedCategory);
-            setProducts(data);
-            setLoading(false);
+          const data = await GetProductbyCategory(selectedCategory);
+          console.log(selectedCategory)
+          setProducts(data);
+          console.log(data);
         } catch (error) {
-            console.log(error)
-            setLoading(false);
+          console.log(error);
+        } finally {
+          setLoading(false);
         }
-    }
+      };
 
     const handleCategorySelect = (category) => {
         setSelectedCategory(category);
