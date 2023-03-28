@@ -9,11 +9,15 @@ import { useNavigate } from 'react-router-dom';
 import DeleteProduct from '../../APIServices/DeleteProduct';
 import { useState } from 'react';
 import Modals from '../../Reusable/Modals';
+import AuthContext from '../../Context/AuthContext';
+import { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const HomeAdmin = () => {
   const dispatch = useDispatch();
   const products = useSelector(state => state.products.products);
   const status = useSelector(state => state.products.status);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const [deleteModal, setDeleteModal] = useState(false); 
   const [deletedProductName, setDeletedProductName] = useState();
@@ -24,6 +28,12 @@ const HomeAdmin = () => {
       dispatch(fetchProducts());
     }
   }, [status, dispatch]);
+
+  if(!isLoggedIn){
+    return(
+      <Navigate to="/Login" replace />
+    );
+  }
 
   const handleAddProduct = () => {
     navigate('/Admin/AddProduct');

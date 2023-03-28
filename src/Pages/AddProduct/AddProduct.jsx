@@ -8,11 +8,15 @@ import Loadings from '../../Reusable/Loadings';
 import GetCategories from '../../APIServices/GetCategories';
 import AddProducts from '../../APIServices/AddProducts';
 import Modals from '../../Reusable/Modals';
+import { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import AuthContext from '../../Context/AuthContext';
 
 const AddProduct = () => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false)
     const [showModal, setShowModal] = useState(false)
+    const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
     const initialValues = {
         name: '',
         description: '',
@@ -78,6 +82,12 @@ const AddProduct = () => {
             setLoading(false)
         } 
     };
+
+    if(!isLoggedIn){
+      return(
+        <Navigate to="/Login" replace />
+      );
+    }
 
     if(loading){
         return(

@@ -18,6 +18,9 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem('isLoggedIn', isLoggedIn);
+    if (window.location.pathname === '/') {
+      window.location.replace('/User/Home');
+    }
   }, [isLoggedIn]);
 
   return (
@@ -25,7 +28,7 @@ const App = () => {
       <div className="App">
         <Routes>
         <Route path='/' element={<OutletNav />}>
-          <Route path='/Login' element={<Login />} />
+          <Route path='Login' element={<Login />} />
 
           <Route path='Admin'>
            <Route path='Home' element={<HomeAdmin />} />
@@ -37,8 +40,9 @@ const App = () => {
             <Route path='Cart' element={<Cart />} />
             <Route path='Product/:id' element={<ProductDetail />} />
           </Route>
+
         </Route>
-        <Route path='*' element={<Navigate to={'/User/Home'} replace/>} />
+        <Route path='*' element={<Navigate to={'User/Home'} replace/>} />
       </Routes>
       </div>
     </AuthContext.Provider>

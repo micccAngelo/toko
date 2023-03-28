@@ -42,7 +42,7 @@ function AppNavbar() {
     localStorage.removeItem('username')
     localStorage.removeItem('isLoggedIn')
     setShowLogoutModal(false);
-    navigate('/Login')
+    navigate('/User/Home')
   };
 
   const handleLogoutCancel = () => {
