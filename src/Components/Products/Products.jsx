@@ -9,6 +9,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { addToCart } from '../../Store/Slices/CartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Search from '../../APIServices/Search';
+import Category from '../Category/Category';
 import GetProductbyCategory from '../../APIServices/GetProductbyCategory';
 
 export const Products = () => {
@@ -19,6 +20,8 @@ export const Products = () => {
     const [notFound, setNotFound] = useState(false);
     const cartItems = useSelector((state) => state.cart.cartItems);
     const dispatch = useDispatch();
+    const [selectedCategory, setSelectedCategory] = useState(localStorage.getItem('selectedCategory') || '');
+
     const [search] = useSearchParams()
 
     useEffect(() => {
@@ -28,6 +31,12 @@ export const Products = () => {
             fetchProducts()
         }
     }, [search])
+
+    useEffect(() => {
+        if (selectedCategory !== ' ') {
+            fetchProductbyCategory(selectedCategory)
+        } 
+    }, [selectedCategory])
 
     const fetchProducts = async () => {
         setLoading(true);
@@ -59,10 +68,10 @@ export const Products = () => {
         }
       }
 
-    const fetchProductbyCategory = async (query) => {
+    const fetchProductbyCategory = async (selectedCategory) => {
         setLoading(true);
         try {
-            const data = await GetProductbyCategory(query);
+            const data = await GetProductbyCategory(selectedCategory);
             setProducts(data);
             setLoading(false);
         } catch (error) {
@@ -70,6 +79,10 @@ export const Products = () => {
             setLoading(false);
         }
     }
+
+    const handleCategorySelect = (category) => {
+        setSelectedCategory(category);
+      }
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product));
@@ -92,6 +105,7 @@ export const Products = () => {
 
     return (
         <div className="product-grid">
+            <Category onSelectCategory={handleCategorySelect} />
         <div className="product-container">
           <div className="product-card-container">
             {products && products.length > 0 && products.map(product => (

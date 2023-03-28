@@ -5,7 +5,7 @@ import Products from '../../Components/Products/Products'
 const Home = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-      <Category />
+      {/* <Category /> */}
       <div style={{ marginLeft: "250px" }}>
         <Products/>
       </div>

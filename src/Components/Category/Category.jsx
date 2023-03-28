@@ -6,8 +6,12 @@ import './Category.css';
 
 function Category() {
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(localStorage.getItem('selectedCategory') || '');
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    localStorage.setItem('selectedCategory', selectedCategory);
+  }, [selectedCategory]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -30,7 +34,7 @@ function Category() {
       setSelectedCategory(category);
     }
   };
-
+  
   return (
     <div className="row" style={{ paddingTop: "50px", position: "fixed", left: 0 }}>
       <div className="col-md-4">
@@ -44,7 +48,6 @@ function Category() {
                 <ListGroup.Item 
                   key={category} 
                   action 
-                  href="#link1"
                   active={category === selectedCategory}
                   onClick={() => handleCategoryClick(category)}
                 >
