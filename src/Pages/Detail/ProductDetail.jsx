@@ -10,6 +10,7 @@ import { Badge, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../Store/Slices/CartSlice';
 import { useSelector } from 'react-redux';
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
 const ProductDetail = () => {
     const [loading, setLoading] = useState();
@@ -38,6 +39,28 @@ const ProductDetail = () => {
         }
         fetchProducts();
     }, [id]);
+
+    const renderRating = (rating) => {
+      const stars = [];
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 !== 0;
+  
+      for (let i = 0; i < fullStars; i++) {
+        stars.push(<FaStar key={`star-${i}`} />);
+      }
+  
+      if (hasHalfStar) {
+        stars.push(<FaStarHalfAlt key="star-half" />);
+      }
+  
+      const remainingStars = 5 - stars.length;
+  
+      for (let i = 0; i < remainingStars; i++) {
+        stars.push(<FaRegStar key={`empty-star-${i}`} />);
+      }
+  
+      return stars;
+    };
 
     if (loading) { 
         return (
@@ -73,6 +96,10 @@ const ProductDetail = () => {
               <Card.Text>
                 <p>${product.price} <br /></p>
                 <p>Stock: {stock} <br /></p>
+                <div className='ratings'>
+                  <p>Rating: {product.rating}</p>
+                  <p className='star'>{renderRating(product.rating)}<br /> </p>
+                </div>
                 <p>Tags<br /></p>
                 <Badge bg="secondary">
                   {product.category}

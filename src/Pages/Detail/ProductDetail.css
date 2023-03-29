@@ -29,3 +29,14 @@
 .button-add {
     width: 650px;
 }
+
+.ratings {
+    display: flex;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+.star {
+    padding-right: 500px;
+}
