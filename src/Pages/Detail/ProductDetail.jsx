@@ -18,6 +18,7 @@ const ProductDetail = () => {
     const [productName, setProductName] = useState();
     const cartItems = useSelector((state) => state.cart.cartItems);
     const dispatch = useDispatch();
+    const [stock, setStock] = useState();
     const { id } = useParams();
 
     useEffect(() => {
@@ -27,6 +28,7 @@ const ProductDetail = () => {
               const productData = await GetSingleProduct(id);
               console.log(id)
               setProduct(productData);
+              setStock(productData.stock);
               console.log(productData)
               setLoading(false);
             } catch (error) {
@@ -47,6 +49,7 @@ const ProductDetail = () => {
       dispatch(addToCart(product));
       setShowModal(true);
       setProductName(product.title);
+      setStock(stock - 1); 
       console.log('Cart Items:', cartItems);
     }
 
@@ -69,7 +72,7 @@ const ProductDetail = () => {
               <Card.Title><h1>{product.title}</h1></Card.Title>
               <Card.Text>
                 <p>${product.price} <br /></p>
-                <p>Stock: {product.stock} <br /></p>
+                <p>Stock: {stock} <br /></p>
                 <p>Tags<br /></p>
                 <Badge bg="secondary">
                   {product.category}
