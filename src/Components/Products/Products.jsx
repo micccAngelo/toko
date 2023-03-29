@@ -75,9 +75,7 @@ export const Products = () => {
         setLoading(true);
         try {
           const data = await GetProductbyCategory(selectedCategory);
-          console.log(selectedCategory)
           setProducts(data);
-          console.log(data);
           setLoading(false);
         } catch (error) {
           console.log(error);
@@ -95,7 +93,6 @@ export const Products = () => {
         dispatch(addToCart(product));
         setShowModal(true);
         setProductName(product.title);
-        console.log('Cart Items:', cartItems);
       }
 
     if(loading) {

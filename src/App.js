@@ -27,8 +27,8 @@ const App = () => {
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       <div className="App">
         <Routes>
+        <Route path='/Login' element={<Login />} />
         <Route path='/' element={<OutletNav />}>
-          <Route path='Login' element={<Login />} />
 
           <Route path='Admin'>
            <Route path='Home' element={<HomeAdmin />} />

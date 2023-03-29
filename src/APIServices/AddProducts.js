@@ -1,8 +1,10 @@
 import BaseURL from './BaseURL'
 
-const AddProducts = async () => {
+const AddProducts = async (values) => {
   try {
-    const response = await BaseURL.post('/products/add')
+    const response = await BaseURL.post('/products/add', {
+      "values": values,
+    })
     return Promise.resolve(response.data.products)
   } catch (error) {
     console.log(error)
